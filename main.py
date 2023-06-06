@@ -8,10 +8,11 @@ try:
     french_words_df = pd.read_csv("words_to_learn.csv")
 except FileNotFoundError:
     french_words_df = pd.read_csv("data/french_words.csv")
-    new_data_file = open("words_to_learn.csv", "a")
+    new_data_file = open("data/words_to_learn.csv", "a")
     new_data_file.write("French,English")
     new_data_file.close()
-finally:
+    french_dict = french_words_df.to_dict(orient="records")
+else:
     french_dict = french_words_df.to_dict(orient="records")
 
 current_card = {}
@@ -33,7 +34,7 @@ def remove_card():
 
 
 def words_to_learn():
-    data_file = open("words_to_learn.csv", "a")
+    data_file = open("data/words_to_learn.csv", "a")
     data_file.write(f"{current_card['French']},{current_card['English']}\n")
     data_file.close()
 
